@@ -1,0 +1,44 @@
+{
+    "name": "@fmllang/parser",
+    "version": "0.0.11",
+    "description": "Parser for Forms Markup Language (FML)",
+    "main": "main.js",
+    "types": "main.d.ts",
+    "scripts": {
+        "dev": "tsx ./src/main.ts ./assets/FORM0001.fml",
+        "build": "tsc",
+        "build::ast": "tsx ./src/genast.ts ./src"
+    },
+    "author": "Cassandra Thompson",
+    "license": "MIT",
+    "declaration": true,
+    "dependencies": {
+        "@fmllang/tokenizer": "^0.0.15"
+    },
+    "devDependencies": {
+        "@types/node": "^22.5.5",
+        "tsx": "^4.19.1",
+        "typescript": "^5.5.3"
+    },
+    "exports": {
+        ".": {
+            "types": "./lib/main.d.ts",
+            "import": "./lib/main.js",
+            "require": "./lib/main.js",
+            "default": "./lib/main.js"
+        },
+        "./lib": {
+            "types": "./lib/main.d.ts",
+            "import": "./lib/main.js",
+            "require": "./lib/main.js",
+            "default": "./lib/main.js"
+        },
+        "./src/Expr.ts": {
+            "types": "./src/main.d.ts",
+            "import": "./src/main.js",
+            "require": "./src/main.js",
+            "default": "./src/main.js"
+        }
+
+    }
+}
