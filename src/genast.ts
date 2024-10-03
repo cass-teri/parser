@@ -16,9 +16,10 @@ defineAst(output_dir, "Expr", [
     "Identifier -> name: string, line_number: number",
     "Container -> identifier: Expr, attributes: Expr[], children: Expr[], line_number: number",
     "Literal -> value: any, line_number: number",
-    "MarkdownExpr -> attributes: Expr[], value: string, line_number: number",
+    "Markdown-> attributes: Expr[], value: string, line_number: number",
     "Select -> identifier: Expr, attributes: Expr[], children: Literal[], line_number: number",
-    "Radio -> identifier: Expr, attributes: Expr[], children: Literal[], line_number: number"
+    "Radio -> identifier: Expr, attributes: Expr[], children: Literal[], line_number: number",
+    "CheckList -> identifier: Expr, attributes: Expr[], children: Literal[], line_number: number"
 ]);
 
 

@@ -1,5 +1,5 @@
 import {Result} from "@fmllang/tokenizer";
-import {Expr, Container, Identifier, Attribute, MarkdownExpr, Select, Radio, Control, Literal} from "./Expr"
+import {Expr, Container, Identifier, Attribute, Markdown, Select, Radio, Control, Literal, CheckList} from "./Expr"
 import {Token} from "@fmllang/tokenizer";
 import {TokenType} from "@fmllang/tokenizer";
 
@@ -121,7 +121,7 @@ export class Parser {
         if(this.match(TokenType.MARKDOWN)) {
             let markdown = peeked.literal
             const line_number = this.peek_at_previous().line
-            result.push(new MarkdownExpr(attributes, markdown, line_number))
+            result.push(new Markdown(attributes, markdown, line_number))
         }
         else if(this.peek_at_current().token_type == TokenType.LEFT_BRACKET){
             let children = this.read_list()
@@ -136,6 +136,9 @@ export class Parser {
                     break
                 case "radio":
                     result.push(new Radio(identifier, attributes, children, line_number))
+                    break
+                case "checklist":
+                    result.push(new CheckList(identifier, attributes, children, line_number))
                     break
                 default:
                     result.push(new Select(identifier, attributes, children, line_number))
@@ -169,7 +172,7 @@ export class Parser {
                 this.advance()
                 this.advance()
                 let markdown = peeked.literal
-                result.push(new MarkdownExpr(attributes, markdown, line_number))
+                result.push(new Markdown(attributes, markdown, line_number))
             }
             else if(this.peek_at_current().token_type == TokenType.LEFT_BRACKET){
                 let children = this.read_list()
@@ -183,6 +186,9 @@ export class Parser {
                         break
                     case "radio":
                         result.push(new Radio(identifier, attributes, children, line_number))
+                        break
+                    case "checklist":
+                        result.push(new CheckList(identifier, attributes, children, line_number))
                         break
                     default:
                         result.push(new Select(identifier, attributes, children, line_number))

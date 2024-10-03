@@ -8,9 +8,10 @@ visitControlExpr(control: Control): R
 visitIdentifierExpr(identifier: Identifier): R
 visitContainerExpr(container: Container): R
 visitLiteralExpr(literal: Literal): R
-visitMarkdownExprExpr(markdownexpr: MarkdownExpr): R
+visitMarkdownExpr(markdown: Markdown): R
 visitSelectExpr(select: Select): R
 visitRadioExpr(radio: Radio): R
+visitCheckListExpr(checklist: CheckList): R
 }
 
         export class Attribute extends Expr{
@@ -86,7 +87,7 @@ accept<R>(visitor: Visitor<R>): R {
         }
 }
 
-        export class MarkdownExpr extends Expr{
+        export class Markdown extends Expr{
             public attributes: Expr[]
 public value: string
 public line_number: number
@@ -97,7 +98,7 @@ this.value = value;
 this.line_number = line_number;
 }
 accept<R>(visitor: Visitor<R>): R {
-            return visitor.visitMarkdownExprExpr(this)
+            return visitor.visitMarkdownExpr(this)
         }
 }
 
@@ -132,5 +133,22 @@ this.line_number = line_number;
 }
 accept<R>(visitor: Visitor<R>): R {
             return visitor.visitRadioExpr(this)
+        }
+}
+
+        export class CheckList extends Expr{
+            public identifier: Expr
+public attributes: Expr[]
+public children: Literal[]
+public line_number: number
+            constructor( identifier: Expr, attributes: Expr[], children: Literal[], line_number: number){
+                super();
+                this.identifier = identifier;
+this.attributes = attributes;
+this.children = children;
+this.line_number = line_number;
+}
+accept<R>(visitor: Visitor<R>): R {
+            return visitor.visitCheckListExpr(this)
         }
 }
