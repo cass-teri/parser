@@ -119,6 +119,8 @@ export class Parser {
         let peeked = this.peek_at_current()
         let elements = this.elements()
         if(this.match(TokenType.MARKDOWN)) {
+            this.advance()
+            this.advance()
             let markdown = peeked.literal
             const line_number = this.peek_at_previous().line
             result.push(new Markdown(attributes, markdown, line_number))
